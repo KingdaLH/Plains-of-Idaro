@@ -7,6 +7,7 @@ TagManager:
   - Goal
   - TP
   - Enemy
+  - Platform
   layers:
   - Default
   - TransparentFX

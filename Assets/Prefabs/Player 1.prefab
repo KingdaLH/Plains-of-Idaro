@@ -232,4 +232,5 @@ MonoBehaviour:
   movementSpeed: 5
   groundCheckLeft: {fileID: 1937875187991819463}
   groundCheckRight: {fileID: 1937875188237509880}
+  player: {fileID: 0}
   aS: {fileID: 0}

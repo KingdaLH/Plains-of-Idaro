@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private Transform groundCheckLeft;
     [SerializeField] private Transform groundCheckRight;
+    //[SerializeField] private GameObject player;
 
     private bool isGroundedLeft;
     private bool isGroundedRight;
@@ -18,16 +20,16 @@ public class PlayerScript : MonoBehaviour
     private SpriteRenderer sr;
 
     public AudioSource aS;
-    //private Animator anim;
+    private Animator anim;
 
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -37,17 +39,33 @@ public class PlayerScript : MonoBehaviour
     private void CheckInput()
     {
         if (Input.GetKey(KeyCode.D))
+        {
             Move(movingLeft: false);
+        }
         else if (Input.GetKey(KeyCode.A))
+        {
             Move(movingLeft: true);
+        }
+        else if (isGroundedLeft && isGroundedRight)
+        {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isJumping", false);
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
+        {
             Jump();
+            anim.SetBool("isJumping", true);
+        }
     }
 
     private void Move(bool movingLeft)
     {
-        //anim.SetBool("Moving", true);
+        if (isGroundedLeft && isGroundedRight)
+        {
+            anim.SetBool("isWalking", true);
+            anim.SetBool("isJumping", false);
+        }
 
         if (movingLeft)
         {
@@ -57,7 +75,7 @@ public class PlayerScript : MonoBehaviour
         else
         {
             transform.Translate(movementSpeed * Time.deltaTime, 0, 0);
-            sr.flipX = false; //Can change to true
+            sr.flipX = false; //Can change to true    
         }
     }
 
@@ -84,11 +102,21 @@ public class PlayerScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Goal"))
+        {
             GameManager.instance.LoadNextLevel();
-       
+            Debug.Log("Woot!");
+        }
+
         if (col.CompareTag("Enemy"))
         {
             GameManager.instance.Respawn();
         }
+
+        /*if (col.gameObject.CompareTag("Platform"))
+        {
+            Debug.Log("test");
+            rb.isKinematic = true;
+            player.transform.parent = col.transform;
+        }*/
     }
 }

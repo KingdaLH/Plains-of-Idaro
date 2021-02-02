@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentLevel < levels.Length)
         {
-            //aS.Play();
+            aS.Play();
             SceneManager.LoadScene(levels[currentLevel + 1]);
             currentLevel++;
         }
