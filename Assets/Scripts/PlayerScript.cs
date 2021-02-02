@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -111,12 +111,5 @@ public class PlayerScript : MonoBehaviour
         {
             GameManager.instance.Respawn();
         }
-
-        /*if (col.gameObject.CompareTag("Platform"))
-        {
-            Debug.Log("test");
-            rb.isKinematic = true;
-            player.transform.parent = col.transform;
-        }*/
     }
 }

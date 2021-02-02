@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Sprite negativeRatingImage;
     [HideInInspector] public GameObject player;
     public int score = 0;
-    private int currentLevel = 0;
+    public int currentLevel = 0;
     public AudioSource aS;
 
     private void Awake()
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        if (currentLevel < levels.Length)
+        if (currentLevel < levels.Length -1)
         {
             aS.Play();
             SceneManager.LoadScene(levels[currentLevel + 1]);

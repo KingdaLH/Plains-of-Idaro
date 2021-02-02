@@ -12,7 +12,8 @@ public class CoinScript : MonoBehaviour
     private void Start()
     {
         aS = GameObject.Find("CoinAudio").GetComponent<AudioSource>();
-        aST = GameObject.Find("EpicAudio").GetComponent<AudioSource>();
+        if (GameManager.instance.currentLevel == 1)
+            aST = GameObject.Find("EpicAudio").GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
