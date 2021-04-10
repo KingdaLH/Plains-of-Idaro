@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

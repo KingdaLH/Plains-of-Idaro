@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4696778592436968991}
   - component: {fileID: 4696778592436968988}
   - component: {fileID: 4696778592436968989}
+  - component: {fileID: -1914941964367921784}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,13 +45,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d562b5288d0e1f747967bbcc54f8047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highPointsTreshold: 0
+  lowPointsTreshold: 0
   dyingScorePenalty: 0
   levels:
   - 
   - 
   - 
+  scoreImage: {fileID: 0}
+  positiveRatingImage: {fileID: 0}
+  neutralRatingImage: {fileID: 0}
+  negativeRatingImage: {fileID: 0}
   player: {fileID: 0}
   score: 0
+  currentLevel: 0
+  aS: {fileID: 0}
 --- !u!82 &4696778592436968989
 AudioSource:
   m_ObjectHideFlags: 0
@@ -147,3 +156,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-1914941964367921784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4696778592436968986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084c13d0d95695c4e86d11525bebba34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
