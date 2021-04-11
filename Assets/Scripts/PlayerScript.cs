@@ -38,25 +38,34 @@ public class PlayerScript : MonoBehaviour
 
     private void CheckInput()
     {
-        anim.SetBool("isWalking", false);
-
         if (Input.GetKey(KeyCode.D))
+        {
             Move(movingLeft: false);
+        }
         else if (Input.GetKey(KeyCode.A))
+        {
             Move(movingLeft: true);
+        }
+        else if (isGroundedLeft && isGroundedRight)
+        {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isJumping", false);
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
+        {
             Jump();
-
-        if (!isGroundedLeft && !isGroundedRight) 
             anim.SetBool("isJumping", true);
-        else
-            anim.SetBool("isJumping", false);
+        }
     }
 
     private void Move(bool movingLeft)
     {
-        anim.SetBool("isWalking", true);
+        if (isGroundedLeft && isGroundedRight)
+        {
+            anim.SetBool("isWalking", true);
+            anim.SetBool("isJumping", false);
+        }
 
         if (movingLeft)
         {
@@ -66,7 +75,7 @@ public class PlayerScript : MonoBehaviour
         else
         {
             transform.Translate(movementSpeed * Time.deltaTime, 0, 0);
-            sr.flipX = false; //Can change to true
+            sr.flipX = false; //Can change to true    
         }
     }
 
@@ -77,7 +86,6 @@ public class PlayerScript : MonoBehaviour
 
         rb.velocity = Vector2.up * jumpVelocity;
         aS.Play();
-        anim.Play("PlayerJump");
     }
 
     private void FixedUpdate()
