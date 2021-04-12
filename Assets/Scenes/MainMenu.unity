@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &21953525 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2966523443202447432, guid: eb7ff2e5befff1b49af3d9f32aabe716, type: 3}
-  m_PrefabInstance: {fileID: 2966523443182150589}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d0b652f32a2cc243917e4028fa0f046, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &143150160
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,9 +984,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MusicMixer: {fileID: 24100000, guid: 23e02b425ee0f744e9f83884eea46bcd, type: 2}
   SFXMixer: {fileID: 24100000, guid: b59338a6bcca29f44aef7fabcbb32734, type: 2}
-  resolutionDropdown: {fileID: 21953525}
   mainMenu: {fileID: 1340363818}
   optionsMenu: {fileID: 848462787}
+  fS: {fileID: 2966523443182150591}
+  res: {fileID: 2966523443182150590}
 --- !u!82 &1422973086
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1010,7 +1000,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 23e02b425ee0f744e9f83884eea46bcd, type: 2}
   m_audioClip: {fileID: 8300000, guid: a78df2a6086c9b944951a03c095de902, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1236,8 +1226,38 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1422973085}
+    - target: {fileID: 2966523443836935234, guid: eb7ff2e5befff1b49af3d9f32aabe716, type: 3}
+      propertyPath: m_text
+      value: Options
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966523443836935235, guid: eb7ff2e5befff1b49af3d9f32aabe716, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966523443836935235, guid: eb7ff2e5befff1b49af3d9f32aabe716, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 227.15933
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966523443836935235, guid: eb7ff2e5befff1b49af3d9f32aabe716, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 47.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966523443836935235, guid: eb7ff2e5befff1b49af3d9f32aabe716, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 59.481873
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb7ff2e5befff1b49af3d9f32aabe716, type: 3}
+--- !u!1 &2966523443182150590 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2966523443202447438, guid: eb7ff2e5befff1b49af3d9f32aabe716, type: 3}
+  m_PrefabInstance: {fileID: 2966523443182150589}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2966523443182150591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2966523442758045123, guid: eb7ff2e5befff1b49af3d9f32aabe716, type: 3}
+  m_PrefabInstance: {fileID: 2966523443182150589}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7761512416615530317
 PrefabInstance:
   m_ObjectHideFlags: 0

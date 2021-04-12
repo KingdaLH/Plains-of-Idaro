@@ -35,12 +35,12 @@ public class GameManager : MonoBehaviour
 
     public void Respawn()
     {
-        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         player.transform.position = LevelManager.instance.spawnPos;
         score -= dyingScorePenalty;
         ScoreChange();
         if (score < 0)
             score = 0;
+        PlayerScript.isDead = false;
     }
 
     public void LoadNextLevel()

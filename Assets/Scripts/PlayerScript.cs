@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -16,10 +17,12 @@ public class PlayerScript : MonoBehaviour
     private bool isGroundedLeft;
     private bool isGroundedRight;
     public static bool isOnLastLevel;
+    public static bool isDead;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
     public AudioSource aS;
+    public AudioSource rip;
     private Animator anim;
 
     private void Awake()
@@ -28,6 +31,7 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        isDead = false;
     }
     
     // Update is called once per frame
@@ -38,50 +42,44 @@ public class PlayerScript : MonoBehaviour
 
     private void CheckInput()
     {
+        anim.SetBool("isWalking", false);
+
         if (Input.GetKey(KeyCode.D))
-        {
             Move(movingLeft: false);
-        }
         else if (Input.GetKey(KeyCode.A))
-        {
             Move(movingLeft: true);
-        }
-        else if (isGroundedLeft && isGroundedRight)
-        {
-            anim.SetBool("isWalking", false);
-            anim.SetBool("isJumping", false);
-        }
 
         if (Input.GetKeyDown(KeyCode.Space))
-        {
             Jump();
+
+        if (!isGroundedLeft && !isGroundedRight) 
             anim.SetBool("isJumping", true);
-        }
+        else
+            anim.SetBool("isJumping", false);
     }
 
     private void Move(bool movingLeft)
     {
-        if (isGroundedLeft && isGroundedRight)
+        if (isDead == false)
         {
             anim.SetBool("isWalking", true);
-            anim.SetBool("isJumping", false);
-        }
 
-        if (movingLeft)
-        {
-            transform.Translate(-movementSpeed * Time.deltaTime, 0, 0);
-            sr.flipX = true; //Can change to false
-        }
-        else
-        {
-            transform.Translate(movementSpeed * Time.deltaTime, 0, 0);
-            sr.flipX = false; //Can change to true    
+            if (movingLeft)
+            {
+                transform.Translate(-movementSpeed * Time.deltaTime, 0, 0);
+                sr.flipX = true; //Can change to false
+            }
+            else
+            {
+                transform.Translate(movementSpeed * Time.deltaTime, 0, 0);
+                sr.flipX = false; //Can change to true
+            }
         }
     }
 
     private void Jump()
     {
-        if (!isGroundedLeft && !isGroundedRight)
+        if (!isGroundedLeft && !isGroundedRight && !isDead)
             return;
 
         rb.velocity = Vector2.up * jumpVelocity;
@@ -98,6 +96,13 @@ public class PlayerScript : MonoBehaviour
         else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
     }
+    
+    public static IEnumerator DeathSequence()
+    {
+        yield return new WaitForSeconds(3);
+        GameManager.instance.Respawn();
+    }
+
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -109,7 +114,10 @@ public class PlayerScript : MonoBehaviour
 
         if (col.CompareTag("Enemy"))
         {
-            GameManager.instance.Respawn();
+            if (isDead) return;
+            isDead = true;
+            rip.Play();
+            StartCoroutine(DeathSequence());
         }
     }
 }
