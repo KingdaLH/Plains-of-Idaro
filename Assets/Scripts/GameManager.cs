@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Vector2 = UnityEngine.Vector2;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,6 +38,7 @@ public class GameManager : MonoBehaviour
     public void Respawn()
     {
         player.transform.position = LevelManager.instance.spawnPos;
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         score -= dyingScorePenalty;
         ScoreChange();
         if (score < 0)
