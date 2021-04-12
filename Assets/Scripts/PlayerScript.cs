@@ -81,9 +81,12 @@ public class PlayerScript : MonoBehaviour
     {
         if (!isGroundedLeft && !isGroundedRight && !isDead)
             return;
-
-        rb.velocity = Vector2.up * jumpVelocity;
+        if (isDead)
+            return;
+        
+        {rb.velocity = Vector2.up * jumpVelocity;}
         aS.Play();
+        
     }
 
     private void FixedUpdate()
@@ -115,6 +118,7 @@ public class PlayerScript : MonoBehaviour
         if (col.CompareTag("Enemy"))
         {
             if (isDead) return;
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             isDead = true;
             rip.Play();
             StartCoroutine(DeathSequence());
